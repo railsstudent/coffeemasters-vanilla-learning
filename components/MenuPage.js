@@ -19,7 +19,6 @@ export class MenuPage extends HTMLElement {
     connectedCallback() {
         console.log('connectedCallback called');
         const template = document.getElementById('menu-page-template');
-        console.log('menu-page-template', template);
         const content = template.content.cloneNode(true);
         this.root.appendChild(content);
 
@@ -41,6 +40,11 @@ export class MenuPage extends HTMLElement {
                 this.root.querySelector("#menu").appendChild(liCategory);
     
                 // TODO: placeholder
+                category.products.forEach((product) => {
+                    const item = document.createElement('product-item');
+                    item.dataset.product = JSON.stringify(product);
+                    liCategory.querySelector('ul').appendChild(item);
+                });
             }  
         } else {
             this.root.querySelector("#menu").innerHTML = `Loading...`;
